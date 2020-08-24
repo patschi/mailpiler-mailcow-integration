@@ -12,13 +12,14 @@ has access to, including the realname.
 ## USAGE
 Add to /usr/local/etc/piler/config-site.php:
 ```
-$config["MAILCOW_API_KEY"] = 'YOUR_READONLY_API_KEY';
+$config['MAILCOW_API_KEY'] = 'YOUR_READONLY_API_KEY';
+$config['MAILCOW_SET_REALNAME'] = true; // default = false
 $config['CUSTOM_EMAIL_QUERY_FUNCTION'] = 'query_mailcow_for_email_access';
 include('auth-mailcow.php');
 ```
 */
 
-// query_mailcow_for_email_access($username) is a custom authentication 
+// query_mailcow_for_email_access($username) is a custom authentication
 // function to overwrite the email addresses the user has access to.
 function query_mailcow_for_email_access($username = '')
 {
@@ -35,9 +36,12 @@ function query_mailcow_for_email_access($username = '')
 	$data['emails'] = array_merge($data['emails'] , $emails);
 
 	// set realname, if available.
-	$realname = mailcow_get_mailbox_realname($username);
-	if ($realname !== null) {
-		$data['realname'] = $realname;
+	if (isset($config['MAILCOW_SET_REALNAME']) 
+	&& $config['MAILCOW_SET_REALNAME'] === true) {
+		$realname = mailcow_get_mailbox_realname($username);
+		if ($realname !== null) {
+			$data['realname'] = $realname;
+		}
 	}
 
 	$session->set("auth_data", $data);
