@@ -2,7 +2,7 @@
 /***
 /usr/local/etc/piler/auth-mailcow.php
 (C) 2020, Patrik Kernstock - patrik.kernstock.net.
-MIT License - No warranty. Use at own risk.
+GNU GPL3 License - No warranty. Use at own risk.
 
 ## DESCRIPTION
 After logging in with IMAP authentication, this can be used
