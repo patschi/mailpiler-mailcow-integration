@@ -41,7 +41,6 @@ function query_mailcow_for_email_access($username = '')
 	}
 
 	$session->set("auth_data", $data);
-	file_put_contents("/tmp/test.txt", print_r($data, true));
 }
 
 // mailcow_get_aliases($mailbox) returns back the name of the
