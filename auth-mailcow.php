@@ -91,9 +91,15 @@ function mailcow_query_api($path)
 {
 	global $config;
 
+	if (isset($config['MAILCOW_HOST'])) {
+		$host = $config['MAILCOW_HOST'];
+	} else {
+		$host = $config['IMAP_HOST'];
+	}
+
 	// get data from mailcow instance
 	$api = file_get_contents(
-		sprintf('https://%s/api/%s', $config['IMAP_HOST'], $path),
+		sprintf('https://%s/api/%s', $host, $path),
 		false, stream_context_create([
 		'http' => [
 			'method' => 'GET',
