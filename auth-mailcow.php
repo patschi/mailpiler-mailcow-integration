@@ -37,7 +37,7 @@ function query_mailcow_for_email_access($username = '')
 	$data['emails'] = array_merge($data['emails'] , $emails);
 
 	// set realname, if available.
-	if (isset($config['MAILCOW_SET_REALNAME']) 
+	if (isset($config['MAILCOW_SET_REALNAME'])
 	&& $config['MAILCOW_SET_REALNAME'] === true) {
 		$realname = mailcow_get_mailbox_realname($username);
 		if ($realname !== null) {
