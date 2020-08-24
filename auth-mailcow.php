@@ -23,6 +23,7 @@ include('auth-mailcow.php');
 // function to overwrite the email addresses the user has access to.
 function query_mailcow_for_email_access($username = '')
 {
+	global $config;
 	$session = Registry::get('session');
 	$data = $session->get("auth_data");
 
