@@ -29,9 +29,11 @@ function query_mailcow_for_email_access($username = '')
 
 	// get emails where user has access to.
 	$emails = mailcow_get_aliases($username);
+	$wildcards = [];
 	foreach ($emails as $i => $email) {
 		if (substr($email, 0, 1) === '@') {
-			$emails[$i] = '*'.$email;
+			$wildcards[$i] = substr($email, 1);
+			unset($emails[$i]);
 		}
 	}
 	$data['emails'] = array_merge($data['emails'] , $emails);
@@ -45,6 +47,9 @@ function query_mailcow_for_email_access($username = '')
 		}
 	}
 
+	// wildcard_domains were implemented on 2020-10-31:
+	// https://bitbucket.org/jsuto/piler/issues/1102
+	$session->set("wildcard_domains", $wildcards);
 	$session->set("auth_data", $data);
 }
 
