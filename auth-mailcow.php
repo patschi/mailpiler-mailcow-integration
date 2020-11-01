@@ -54,7 +54,7 @@ function query_mailcow_for_email_access($username = '')
 function mailcow_get_mailbox_realname($mailbox = '')
 {
 	// get mailbox info from mailcow instance
-	$api = mailcow_query_api(sprintf('v1/get/mailbox/%s', urlencode($mailbox)));
+	$api = mailcow_query_api(sprintf('v1/get/mailbox/%s', $mailbox));
 	if ($api !== null && !empty($api->name)) {
 		return trim($api->name);
 	}
@@ -72,7 +72,9 @@ function mailcow_get_aliases($mailbox = '')
 		$emails = [];
 		$mailbox = strtolower($mailbox);
 		foreach ($api as $alias) {
-			if ($alias->active_int === 1
+			if (
+				((isset($alias->active_int) && $alias->active_int === 1) ||
+				(isset($alias->active) && $alias->active === 1))
 			&& strpos(strtolower($alias->goto), $mailbox) !== false) {
 				array_push($emails, strtolower($alias->address));
 			}
@@ -90,6 +92,7 @@ function mailcow_get_aliases($mailbox = '')
 function mailcow_query_api($path)
 {
 	global $config;
+	$path = urlencode($path);
 
 	if (isset($config['MAILCOW_HOST'])) {
 		$host = $config['MAILCOW_HOST'];
