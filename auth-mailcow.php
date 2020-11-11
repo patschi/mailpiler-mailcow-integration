@@ -36,6 +36,9 @@ function query_mailcow_for_email_access($username = '')
 			unset($emails[$i]);
 		}
 	}
+	if(is_array($data) === false || array_key_exists('emails', $data) === false){
+        	return;
+        }
 	$data['emails'] = array_merge($data['emails'] , $emails);
 
 	// set realname, if available.
