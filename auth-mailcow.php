@@ -121,7 +121,7 @@ function mailcow_query_api($path)
 				'Accept: application/json',
 				sprintf('X-API-Key: %s', $config["MAILCOW_API_KEY"])
 			],
-			'timeout' => 10, // 10 secs timeout.
+			'timeout' => 5, // 5 secs timeout.
 		]
 	]));
 
