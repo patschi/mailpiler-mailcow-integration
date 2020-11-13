@@ -6,11 +6,11 @@ GNU GPL3 License - No warranty. Use at own risk.
 
 ## DESCRIPTION
 After logging in with IMAP authentication, this can be used
-to retrieve all alias email addresses the mailbox/username
-has access to, including the realname.
+to retrieve all alias email addresses, including wildcard,
+the mailbox/username has access to, including the realname.
 
 ## USAGE
-Add to /usr/local/etc/piler/config-site.php:
+Add config settings to /usr/local/etc/piler/config-site.php:
 ```
 $config['MAILCOW_API_KEY'] = 'YOUR_READONLY_API_KEY';
 $config['MAILCOW_SET_REALNAME'] = true; // default = false
@@ -47,7 +47,7 @@ function query_mailcow_for_email_access($username = '')
 		}
 	}
 
-	// wildcard_domains were implemented on 2020-10-31:
+	// wildcard_domains support were implemented on 2020-10-31:
 	// https://bitbucket.org/jsuto/piler/issues/1102
 	$session->set("wildcard_domains", $wildcards);
 	$session->set("auth_data", $data);
@@ -77,10 +77,16 @@ function mailcow_get_aliases($mailbox = '')
 		$emails = [];
 		$mailbox = strtolower($mailbox);
 		foreach ($api as $alias) {
-			if (
-				((isset($alias->active_int) && $alias->active_int === 1) ||
-				(isset($alias->active) && $alias->active === 1))
-			&& strpos(strtolower($alias->goto), $mailbox) !== false) {
+			// check if alias is active (this is for newer instances)
+			if (isset($alias->active_int) && $alias->active_int !== 1) {
+				continue;
+			}
+			// check if alias is active (for older instances where active used)
+			if (isset($alias->active) && $alias->active !== 1) {
+				continue;
+			}
+			// if user email address is added to alias goto, allow access
+			if (strpos(strtolower($alias->goto), $mailbox) !== false) {
 				array_push($emails, strtolower($alias->address));
 			}
 		}
@@ -122,7 +128,7 @@ function mailcow_query_api($path)
 	// decode json
 	$api = json_decode($api);
 	// check if we got valid json.
-	if (json_last_error() == JSON_ERROR_NONE) {
+	if (json_last_error() === JSON_ERROR_NONE) {
 		return $api;
 	} else {
 		return null;
