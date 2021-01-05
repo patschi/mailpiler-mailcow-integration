@@ -10,7 +10,7 @@ This is a simple integration of mailcow aliases and the mailbox name into mailpi
 | ------------- | ------ | ----- |
 | piler 1.3.9   | Y      | Working, but domain wildcards are not yet implemented. |
 | piler 1.3.10  | Y      | No current limitations. |
-| piler 1.3.10+ | N      | Most likely to work, but not tested. |
+| piler 1.3.10+ | N      | Future versions might work, but not tested. |
 
 ## The problem to solve
 
