@@ -38,6 +38,7 @@ function query_mailcow_for_email_access($username = '')
 	$emails = mailcow_get_aliases($username);
 	$wildcards = [];
 	foreach ($emails as $i => $email) {
+		// if email starts with "@", it's a domain wildcard alias
 		if (substr($email, 0, 1) === '@') {
 			$wildcards[$i] = substr($email, 1);
 			unset($emails[$i]);
@@ -48,6 +49,7 @@ function query_mailcow_for_email_access($username = '')
 	// set realname, if available.
 	if (isset($config['MAILCOW_SET_REALNAME'])
 	&& $config['MAILCOW_SET_REALNAME'] === true) {
+		// get the name from the mailcow API
 		$realname = mailcow_get_mailbox_realname($username);
 		if ($realname !== null) {
 			$data['realname'] = $realname;

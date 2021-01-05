@@ -2,6 +2,16 @@
 
 This is a simple integration of mailcow aliases and the mailbox name into mailpiler when using IMAP authentication. [A guide can be found in the official mailcow docs here](https://mailcow.github.io/mailcow-dockerized-docs/u_e-mailpiler-integration/).
 
+## Requirements
+
+### piler
+
+| piler version | Tested | Notes |
+| ------------- | ------ | ----- |
+| piler 1.3.9   | Y      | Working, but domain wildcards are not yet implemented. |
+| piler 1.3.10  | Y      | No current limitations. |
+| piler 1.3.10+ | N      | Most likely to work, but not tested. |
+
 ## The problem to solve
 
 mailpiler offers the authentication based on IMAP:
