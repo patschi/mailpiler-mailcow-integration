@@ -1,8 +1,15 @@
 <?php
 /***
 /usr/local/etc/piler/auth-mailcow.php
-(C) 2020, Patrik Kernstock - patrik.kernstock.net.
+(C) 2021, Patrik Kernstock - patrik.kernstock.net.
 GNU GPL3 License - No warranty. Use at own risk.
+
+## REQUIREMENTS
+- working mailpiler installation:
+piler 1.3.9 (no domain wildcards supported, but working)
+piler 1.3.10 (fully working, tested)
+- working mailcow installation
+- adjusting mailpiler configuration as below
 
 ## DESCRIPTION
 After logging in with IMAP authentication, this can be used
@@ -49,6 +56,7 @@ function query_mailcow_for_email_access($username = '')
 
 	// wildcard_domains support were implemented on 2020-10-31:
 	// https://bitbucket.org/jsuto/piler/issues/1102
+	// Released in piler 1.3.10.
 	$session->set("wildcard_domains", $wildcards);
 	$session->set("auth_data", $data);
 }
