@@ -113,7 +113,6 @@ function mailcow_get_aliases($mailbox = '')
 function mailcow_query_api($path)
 {
 	global $config;
-	$path = urlencode($path);
 
 	if (isset($config['MAILCOW_HOST'])) {
 		$host = $config['MAILCOW_HOST'];
