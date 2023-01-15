@@ -1,13 +1,12 @@
 <?php
 /***
 /usr/local/etc/piler/auth-mailcow.php
-(C) 2021, Patrik Kernstock - patrik.kernstock.net.
+(C) 2021-2023, Patrik Kernstock - patrik.kernstock.net.
 GNU GPL3 License - No warranty. Use at own risk.
 
 ## REQUIREMENTS
-- working mailpiler installation:
-piler 1.3.9 (no domain wildcards supported, but working)
-piler 1.3.10 (fully working, tested)
+- working mailpiler installation
+(see supported version at https://github.com/patschi/mailpiler-mailcow-integration)
 - working mailcow installation
 - adjusting mailpiler configuration as below
 
@@ -34,6 +33,12 @@ function query_mailcow_for_email_access($username = '')
 	$session = Registry::get('session');
 	$data = $session->get("auth_data");
 
+	// Check if $data has any data we can process.
+	// This is not the case when using local accounts, e.g. admin@local.
+	if ($data === "") {
+		return;
+	}
+
 	// get emails where user has access to.
 	$emails = mailcow_get_aliases($username);
 	$wildcards = [];
@@ -48,7 +53,7 @@ function query_mailcow_for_email_access($username = '')
 
 	// set realname, if available.
 	if (isset($config['MAILCOW_SET_REALNAME'])
-	&& $config['MAILCOW_SET_REALNAME'] === true) {
+		&& $config['MAILCOW_SET_REALNAME'] === true) {
 		// get the name from the mailcow API
 		$realname = mailcow_get_mailbox_realname($username);
 		if ($realname !== null) {
@@ -56,7 +61,7 @@ function query_mailcow_for_email_access($username = '')
 		}
 	}
 
-	// wildcard_domains support were implemented on 2020-10-31:
+	// wildcard_domains support was implemented on 2020-10-31:
 	// https://bitbucket.org/jsuto/piler/issues/1102
 	// Released in piler 1.3.10.
 	$session->set("wildcard_domains", $wildcards);
