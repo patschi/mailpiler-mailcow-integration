@@ -6,11 +6,14 @@ This is a simple integration of mailcow aliases and the mailbox name into mailpi
 
 ### piler
 
-| piler version | Tested | Notes |
-| ------------- | ------ | ----- |
-| piler 1.3.9   | Y      | Working, but domain wildcards are not yet implemented. |
-| piler 1.3.10  | Y      | No current limitations. |
-| piler 1.3.10+ | N      | Future versions might work, but not tested. |
+Tested combinations:
+
+| piler version | PHP versions | Notes |
+| ------------- | ------------ | ----- |
+| 1.3.9         | 7.4          | Working, but domain wildcards are not yet implemented. |
+| 1.3.10        | 7.4          | None |
+| 1.4.1         | 7.4          | PHP 8.1 testing planned |
+| Future        | n/a          | Future versions might work, but not tested. |
 
 ## The problem to solve
 
