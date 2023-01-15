@@ -12,7 +12,7 @@ Tested combinations:
 | ------------- | ------------ | ----- |
 | 1.3.9         | 7.4          | Working, but domain wildcards are not yet implemented. |
 | 1.3.10        | 7.4          | None |
-| 1.4.1         | 7.4          | PHP 8.1 testing planned |
+| 1.4.1/1.4.2   | 7.4, 8.1     | None |
 | Future        | n/a          | Future versions might work, but not tested. |
 
 ## The problem to solve
@@ -22,7 +22,7 @@ mailpiler offers the authentication based on IMAP:
 ```php
 $config['ENABLE_IMAP_AUTH'] = 1;
 $config['IMAP_HOST'] = 'mail.example.com';
-$config['IMAP_PORT'] =  993;
+$config['IMAP_PORT'] = 993;
 $config['IMAP_SSL'] = true;
 ```
 
