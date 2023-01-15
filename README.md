@@ -4,8 +4,6 @@ This is a simple integration of mailcow aliases and the mailbox name into mailpi
 
 ## Requirements
 
-### piler
-
 Tested combinations:
 
 | piler version | PHP versions | Notes |
@@ -30,4 +28,6 @@ So when you log in using `patrik@example.com`, you will only see delivered email
 
 With hooking into the authentication process of mailpiler this fires API requests to the mailcow API (requiring read-only API access) to read out the aliases your email address participates. Beside that, it will also read the "Name" of the mailbox specified to display it on the top-right of mailpiler after login.
 
-[See more details in the official mailcow docs here](https://mailcow.github.io/mailcow-dockerized-docs/u_e-mailpiler-integration/).
+## Configuration
+
+[See setup instructions in the official mailcow docs here](https://mailcow.github.io/mailcow-dockerized-docs/u_e-mailpiler-integration/).
