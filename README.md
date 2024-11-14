@@ -4,14 +4,23 @@ This is a simple integration of mailcow aliases and the mailbox name into mailpi
 
 ## Requirements
 
-Tested combinations:
+**Tested combinations:**
 
 | piler version | PHP versions | Notes |
 | ------------- | ------------ | ----- |
 | 1.3.9         | 7.4          | Working, but domain wildcards are not yet implemented. |
 | 1.3.10        | 7.4          | None |
 | 1.4.1/1.4.2   | 7.4, 8.1     | None |
-| Future        | n/a          | Future versions might work, but not tested. |
+| 1.4.6         | 8.3          | Fixed on 2024-11-14 |
+| Future        | n/a          | Future versions might work, but not tested. Raise [issue](https://github.com/patschi/mailpiler-mailcow-integration#issue) if broken. |
+
+## Issue
+
+Should you encounter any issue, please do following first:
+1. Try the [latest version on GitHub](https://raw.githubusercontent.com/patschi/mailpiler-mailcow-integration/refs/heads/master/auth-mailcow.php) and check if the issue still exists.
+2. Ensure you're using one of the [latest mailpiler versions](https://github.com/jsuto/piler/releases). Ancient versions won't be supported.
+3. Check all [GitHub issues](https://github.com/patschi/mailpiler-mailcow-integration/issues?q=is%3Aissue) if your issue is already known or was already addressed.
+4. If no luck, [open a issue](https://github.com/patschi/mailpiler-mailcow-integration/issues/new). Include as much details as possible to help understanding your issue and your environment.
 
 ## The problem to solve
 
@@ -31,3 +40,5 @@ With hooking into the authentication process of mailpiler this fires API request
 ## Configuration
 
 [See setup instructions in the official mailcow docs here](https://mailcow.github.io/mailcow-dockerized-docs/u_e-mailpiler-integration/).
+
+This integration is already automatically built-in when using the unofficial [mailpiler docker](https://github.com/simatec/piler-docker) project.
