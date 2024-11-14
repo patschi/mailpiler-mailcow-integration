@@ -33,10 +33,10 @@ function query_mailcow_for_email_access($username = '')
 	$session = Registry::get('session');
 	$data = $session->get("auth_data");
 
-	// Check if $data has any data we can process.
+	// Check if $data and $username has any data we can process.
 	// This is not the case when using local accounts, e.g. admin@local.
-	if ($data === "") {
-		return;
+	if ($data === '' || $username === '') {
+		return [];
 	}
 
 	// get emails where user has access to.
